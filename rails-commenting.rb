@@ -5,24 +5,24 @@
 
 # app/controller/blog_posts_controller.rb
 
-# 1)
+# 1)class BlogPostsController is inheriting functionality from the ApplicationController 
 class BlogPostsController < ApplicationController
   def index
-    # 2)
+    # 2) get every item in the blostpost object and assign it to the instance variable posts
     @posts = BlogPost.all
   end
 
   def show
-    # 3)
+    # 3) assign a params to the .find method to find match the id of the query and assign it to the instance variable post
     @post = BlogPost.find(params[:id])
   end
 
-  # 4)
+  # 4) create a method named new
   def new
   end
 
   def create
-    # 5)
+    # 5) creating a new model and assigning to the instance variable post
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to @post
@@ -36,15 +36,15 @@ class BlogPostsController < ApplicationController
     if @post.destroy
       redirect_to blog_posts_path
     else
-      # 6)
+      # 6) If it fails to destroy the blog post, it will redirect you to the post you intended to delete
       redirect_to blog_post_path(@post)
     end
   end
 
-  # 7)
+  # 7) makes 
   private
   def blog_post_params
-    # 8)
+    # 8) something, suggestion made by connor 
     params.require(:blog_post).permit(:title, :content)
   end
 
